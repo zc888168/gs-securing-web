@@ -1,0 +1,11 @@
+.idea/
+build.gradle
+.mvn/
+gs-securing-web.iml
+mvnw
+mvnw.cmd
+./mvn
+target
+gradle/**
+gradle
+gradlew*
