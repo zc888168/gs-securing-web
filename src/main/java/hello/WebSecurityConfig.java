@@ -1,5 +1,6 @@
 package hello;
 
+import csrftokenrepository.CsrfTokenRedisRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private RedisOperationsSessionRepository redisOperationsSessionRepository;
 
+    @Resource
+    private CsrfTokenRedisRepository csrfTokenRedisRepository;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -37,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.sessionManagement().maximumSessions(1).sessionRegistry(new SpringSessionBackedSessionRegistry(redisOperationsSessionRepository)).expiredUrl("/login");
        // http.sessionManagement().maximumSessions(1).expiredUrl("/login");
+        http.csrf().csrfTokenRepository(csrfTokenRedisRepository);
     }
 
     @Bean
