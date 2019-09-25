@@ -36,6 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
         /**
          * default 默认固定会话保护机制
+         * none
+         * newSession
+         * migrateSession
+         * changeSessionId
          */
         http.sessionManagement().sessionFixation().changeSessionId();
         //http.sessionManagement().maximumSessions(1).sessionRegistry(new SpringSessionBackedSessionRegistry(redisOperationsSessionRepository)).expiredUrl("/login");
