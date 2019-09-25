@@ -1,5 +1,6 @@
 package hello;
 
+import handler.RedisLogoutHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private RedisOperationsSessionRepository redisOperationsSessionRepository;
 
+    @Resource
+    private RedisLogoutHandler redisLogoutHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -32,9 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
                 .and()
-            .logout()
+            .logout().addLogoutHandler(redisLogoutHandler)
                 .permitAll();
-
         //http.sessionManagement().maximumSessions(1).sessionRegistry(new SpringSessionBackedSessionRegistry(redisOperationsSessionRepository)).expiredUrl("/login");
     }
 
