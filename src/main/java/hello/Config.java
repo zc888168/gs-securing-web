@@ -7,6 +7,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableRedisHttpSession
 public class Config {
 
+
 	@Bean
 	public LettuceConnectionFactory connectionFactory() {
 		return new LettuceConnectionFactory("127.0.0.1", 6379);
